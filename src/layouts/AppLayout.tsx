@@ -1,16 +1,16 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 import Header from '../components/Header';
 
 interface AppLayoutProps {
-  children: ReactNode;
 }
 
-const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
+const AppLayout: React.FC<AppLayoutProps> = () => {
   return (
     <div className="app-layout">
       <Header />
       <main className="app-content">
-        {children}
+        <Outlet />
       </main>
     </div>
   );

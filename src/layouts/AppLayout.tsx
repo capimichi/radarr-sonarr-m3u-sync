@@ -7,7 +7,7 @@ interface AppLayoutProps {
 
 const AppLayout: React.FC<AppLayoutProps> = () => {
   return (
-    <div className="">
+    <div className="bg-background">
       <div className="">
         <Header />
         <main className="max-w-[768px] mx-auto my-7">

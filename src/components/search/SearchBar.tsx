@@ -12,7 +12,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ query, onQueryChange }) => {
         <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">🔍</span>
         <input
           type="text"
-          className="w-full py-4 pl-12 pr-4 rounded-lg border-none bg-gray-100/20 text-white text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full py-4 pl-12 pr-4 rounded-lg border-none bg-white text-base focus:outline-none focus:ring-2 focus:ring-indigo-500"
           placeholder="Search for TV shows or movies"
           value={query}
           onChange={(e) => onQueryChange(e.target.value)}

@@ -1,18 +1,11 @@
 import React, { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import AuthService from './services/AuthService';
-import UserService from './services/UserService';
-import VehicleService from './services/VehicleService';
-import AuthClient from './clients/AuthClient';
 import BackendClient from './clients/BackendClient';
-import UserClient from './clients/UserClient';
-import VehicleClient from './clients/VehicleClient';
+import SearchService from './services/SearchService';
 
 // Definizione dell'interfaccia per il contesto dei servizi
 interface ServicesContextType {
-  authService: AuthService;
-  userService: UserService;
-  vehicleService: VehicleService;
+  searchService: SearchService;
 }
 
 // Creazione del contesto React
@@ -30,21 +23,10 @@ export const ServicesProvider: React.FC<ServicesProviderProps> = ({
 
     // Inizializzazione dei client e dei servizi
     const backendClient = new BackendClient(backendUrl);
-    const authClient = new AuthClient(backendClient);
-    const authService = new AuthService(authClient);
-    
-    // Create clients without token (they'll get it from Redux store)
-    const userClient = new UserClient(backendClient);
-    const userService = new UserService(userClient);
-    
-    // Vehicle service initialization
-    const vehicleClient = new VehicleClient(backendClient);
-    const vehicleService = new VehicleService(vehicleClient);
+    const searchService = new SearchService(backendClient);
 
     const services: ServicesContextType = {
-        authService,
-        userService,
-        vehicleService
+        searchService,
     };
 
     return (
@@ -61,17 +43,4 @@ export const useServices = (): ServicesContextType => {
     throw new Error('useServices deve essere utilizzato all\'interno di un ServicesProvider');
   }
   return context;
-};
-
-// Hooks di utilità per accedere direttamente ai singoli servizi
-export const useAuthService = (): AuthService => {
-  return useServices().authService;
-};
-
-export const useUserService = (): UserService => {
-  return useServices().userService;
-};
-
-export const useVehicleService = (): VehicleService => {
-  return useServices().vehicleService;
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import AppLayout from '../../layouts/AppLayout';
 
 const AppIndex: React.FC = () => {
   return (

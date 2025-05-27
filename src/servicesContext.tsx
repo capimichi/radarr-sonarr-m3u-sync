@@ -1,4 +1,5 @@
-import React, { createContext, ReactNode, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
+import type { ReactNode } from 'react';
 import AuthService from './services/AuthService';
 import UserService from './services/UserService';
 import VehicleService from './services/VehicleService';
@@ -20,7 +21,6 @@ const ServicesContext = createContext<ServicesContextType | undefined>(undefined
 // Provider component per rendere disponibili i servizi
 interface ServicesProviderProps {
   children: ReactNode;
-  apiUrl?: string;
 }
 
 export const ServicesProvider: React.FC<ServicesProviderProps> = ({

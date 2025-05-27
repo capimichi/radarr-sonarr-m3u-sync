@@ -3,7 +3,6 @@ import AppLayout from '../../layouts/AppLayout';
 
 const AppIndex: React.FC = () => {
   return (
-    <AppLayout>
       <div className="app-index-page">
         <h1>Welcome to Radarr/Sonarr M3U Sync</h1>
         <div className="dashboard-summary">
@@ -21,7 +20,6 @@ const AppIndex: React.FC = () => {
           </div>
         </div>
       </div>
-    </AppLayout>
   );
 };
 

@@ -1,5 +1,6 @@
 from injector import inject
 from fastapi import APIRouter, HTTPException, status
+from radarrsonarrm3u.model.GetSearchResultsResponse import GetSearchResultsResponse
 
 
 class SearchController:
@@ -13,7 +14,7 @@ class SearchController:
         """Registra le rotte per il controller"""
         self.router.add_api_route("", self.get_search_results, methods=["GET"])
         
-    async def get_search_results(self):
+    async def get_search_results(self, term: str) -> GetSearchResultsResponse:
         """Ottiene tutti i search_results"""
         # Implementazione provvisoria
         return {"search_results": []}

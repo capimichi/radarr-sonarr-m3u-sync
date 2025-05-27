@@ -6,31 +6,14 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                flatui: {
-                    // American Palette
-                    'turquoise': '#1abc9c',
-                    'emerald': '#2ecc71',
-                    'peterRiver': '#3498db',
-                    'amethyst': '#9b59b6',
-                    'wetAsphalt': '#34495e',
-                    'greenSea': '#16a085',
-                    'nephritis': '#27ae60',
-                    'belizeHole': '#2980b9',
-                    'wisteria': '#8e44ad',
-                    'midnightBlue': '#2c3e50',
-                    'sunFlower': '#f1c40f',
-                    'carrot': '#e67e22',
-                    'alizarin': '#e74c3c',
-                    'clouds': '#ecf0f1',
-                    'concrete': '#95a5a6',
-                    'orange': '#f39c12',
-                    'pumpkin': '#d35400',
-                    'pomegranate': '#c0392b',
-                    'silver': '#bdc3c7',
-                    'asbestos': '#7f8c8d',
-                },
+                'background': '#bdc3c7',     // Sfondo principale (grigio chiaro)
+                'header':     '#2c3e50',     // Header (blu scuro desaturato)
+                'text':       '#34495e',     // Testo principale (grigio-blu scuro, per sfondi chiari come 'background')
+                'primary':    '#1abc9c',     // Colore primario/accento principale (turchese)
+                'secondary':  '#e67e22',     // Colore secondario/accento alternativo (arancione)
+                'white':      '#ffffff',     // Colore bianco per testo o elementi su sfondi scuri
             },
         },
-    },
-    plugins: [],
+        plugins: [],
+    }
 }

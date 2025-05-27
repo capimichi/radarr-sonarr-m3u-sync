@@ -6,7 +6,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'background': '#bdc3c7',     // Sfondo principale (grigio chiaro)
+                'background': '#ecf0f1',     // Sfondo principale (grigio chiaro)
                 'header':     '#2c3e50',     // Header (blu scuro desaturato)
                 'text':       '#34495e',     // Testo principale (grigio-blu scuro, per sfondi chiari come 'background')
                 'primary':    '#1abc9c',     // Colore primario/accento principale (turchese)

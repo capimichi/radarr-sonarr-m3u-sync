@@ -16,7 +16,7 @@ const Search: React.FC<SearchProps> = ({ onSearch, results }) => {
   };
   
   return (
-    <div className="w-full max-w-4xl mx-auto px-5">
+    <div className="w-full max-w-4xl mx-auto">
       <SearchBar query={query} onQueryChange={handleQueryChange} />
       
       {results.length > 0 && (

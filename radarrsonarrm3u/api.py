@@ -2,6 +2,7 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from radarrsonarrm3u.container.DefaultContainer import DefaultContainer
+from radarrsonarrm3u.controller.SearchController import SearchController
 import uvicorn
 from starlette.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
@@ -32,6 +33,10 @@ app.add_middleware(
 
 app.mount("/", StaticFiles(directory="dist", html=True), name="dist")
 
+search_controller = default_container.get(SearchController)
+
+# Includiamo il router del SearchController nell'app
+app.include_router(search_controller.router)
 
 @app.get("/health", tags=["Health"])
 async def health_check():

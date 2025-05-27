@@ -1,6 +1,6 @@
 from injector import inject
 from fastapi import APIRouter, HTTPException, status
-from radarrsonarrm3u.model.GetSearchResultsResponse import GetSearchResultsResponse
+from radarrsonarrm3u.model.response.GetSearchResultsResponse import GetSearchResultsResponse
 
 
 class SearchController:

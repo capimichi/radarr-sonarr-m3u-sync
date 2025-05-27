@@ -10,7 +10,7 @@ const AppLayout: React.FC<AppLayoutProps> = () => {
     <div className="">
       <div className="">
         <Header />
-        <main className="max-w-[480px] mx-auto">
+        <main className="max-w-[768px] mx-auto my-5">
           <Outlet />
         </main>
       </div>

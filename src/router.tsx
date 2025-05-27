@@ -8,7 +8,7 @@ import VehiclesEdit from './pages/vehicles/VehiclesEdit';
 const router = createHashRouter([
 	{
 		path: '/',
-		element: <Navigate to="/login" replace />,
+		element: <Navigate to="/app" replace />,
 	},
 	{
 		path: '/app',

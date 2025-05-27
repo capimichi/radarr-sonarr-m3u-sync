@@ -1,28 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
 
 const Header: React.FC = () => {
   return (
     <header className="app-header">
       <div className="logo">
-        <Link to="/">Radarr/Sonarr M3U Sync</Link>
+        <Link to="/">
+          <h1>Streamr</h1>
+        </Link>
       </div>
-      <nav className="main-nav">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/movies">Movies</Link>
-          </li>
-          <li>
-            <Link to="/series">Series</Link>
-          </li>
-          <li>
-            <Link to="/settings">Settings</Link>
-          </li>
-        </ul>
-      </nav>
+      <div className="settings">
+        <Link to="/settings">
+          <FontAwesomeIcon icon={faCog} />
+        </Link>
+      </div>
     </header>
   );
 };

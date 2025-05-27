@@ -7,10 +7,10 @@ interface AppLayoutProps {
 
 const AppLayout: React.FC<AppLayoutProps> = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center">
-      <div className="app-layout w-full max-w-[480px] bg-white shadow-md">
+    <div className="">
+      <div className="">
         <Header />
-        <main className="app-content p-4">
+        <main className="max-w-[480px] mx-auto">
           <Outlet />
         </main>
       </div>

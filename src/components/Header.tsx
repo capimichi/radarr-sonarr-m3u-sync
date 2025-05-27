@@ -5,7 +5,7 @@ import { faCog } from '@fortawesome/free-solid-svg-icons';
 
 const Header: React.FC = () => {
   return (
-    <header className="app-header bg-blue-600 text-white px-4 py-3 flex justify-between items-center shadow-md">
+    <header className="max-w-[480px] mx-auto bg-blue-800 text-white flex items-center justify-between p-4 shadow-md">
       <div className="logo">
         <Link to="/" className="no-underline text-white">
           <h1 className="text-xl font-bold m-0">Streamr</h1>

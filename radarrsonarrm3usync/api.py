@@ -1,8 +1,9 @@
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from radarrsonarrm3u.container.DefaultContainer import DefaultContainer
-from radarrsonarrm3u.controller.SearchController import SearchController
+from radarrsonarrm3usync.container.DefaultContainer import DefaultContainer
+from radarrsonarrm3usync.controller.SearchController import SearchController
+from radarrsonarrm3usync.controller.ConfigurationController import ConfigurationController
 import uvicorn
 from starlette.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
@@ -31,12 +32,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/", StaticFiles(directory="dist", html=True), name="dist")
 
 search_controller = default_container.get(SearchController)
+configuration_controller = default_container.get(ConfigurationController)
 
 # Includiamo il router del SearchController nell'app
-app.include_router(search_controller.router)
+app.include_router(search_controller.router, prefix="/api")
+# Includiamo il router del ConfigurationController nell'app
+app.include_router(configuration_controller.router, prefix="/api")
+
+app.mount("/", StaticFiles(directory="dist", html=True), name="dist")
 
 @app.get("/health", tags=["Health"])
 async def health_check():
@@ -45,7 +50,7 @@ async def health_check():
 # Per eseguire il server direttamente quando si esegue questo file
 if __name__ == "__main__":
     uvicorn.run(
-        "radarrsonarrm3u.api:app",  # Percorso completo del modulo
+        "radarrsonarrm3usync.api:app",  # Percorso completo del modulo
         host=default_container.get_var("api_host"),
         port=default_container.get_var("api_port"),
         reload=True

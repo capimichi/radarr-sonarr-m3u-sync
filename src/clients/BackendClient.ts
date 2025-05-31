@@ -1,17 +1,78 @@
 // Placeholder BackendClient
-import type { SearchResult } from '../types/SearchResult';
+import type SearchResult from '../types/SearchResult';
+import type Configuration from '../types/Configuration';
+import type SearchResponse from '../types/response/SearchResponse';
 
 export default class BackendClient {
+  private backendUrl: string;
+
   constructor(backendUrl: string) {
-    console.log('Placeholder BackendClient initialized with URL:', backendUrl);
+    this.backendUrl = backendUrl;
+    console.log('BackendClient initialized with URL:', backendUrl);
   }
 
-  async search(term: string): Promise<SearchResult[]> {
-    console.log('BackendClient search term:', term);
-    return Promise.resolve([
-      { title: 'Mock Movie 1', type: 'movie', image: 'https://via.placeholder.com/150/FF0000/FFFFFF?Text=Movie1' },
-      { title: 'Mock TV Show 1', type: 'tv', image: 'https://via.placeholder.com/150/00FF00/FFFFFF?Text=TVShow1' },
-      { title: 'Mock Movie 2', type: 'movie', image: 'https://via.placeholder.com/150/0000FF/FFFFFF?Text=Movie2' }
-    ]);
+  async search(term: string): Promise<SearchResponse> {
+    try {
+      const response = await fetch(`${this.backendUrl}/api/search?term=${encodeURIComponent(term)}`, {
+        method: 'GET',
+        headers: {
+          'accept': 'application/json'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Search failed: ${response.status} ${response.statusText}`);
+      }
+      
+      return await response.json() as SearchResponse;
+    } catch (error) {
+      console.error('Search request failed:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Fetches the current configuration
+   * @returns Promise with the configuration object
+   */
+  async getConfiguration(): Promise<Configuration> {
+    try {
+      const response = await fetch(`${this.backendUrl}/api/configuration`);
+      
+      if (!response.ok) {
+        throw new Error(`Error fetching configuration: ${response.statusText}`);
+      }
+      
+      return await response.json() as Configuration;
+    } catch (error) {
+      console.error('Failed to fetch configuration:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Updates the configuration
+   * @param configuration The new configuration to set
+   * @returns Promise with the updated configuration
+   */
+  async updateConfiguration(configuration: Configuration): Promise<Configuration> {
+    try {
+      const response = await fetch(`${this.backendUrl}/api/configuration`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(configuration),
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Error updating configuration: ${response.statusText}`);
+      }
+      
+      return await response.json() as Configuration;
+    } catch (error) {
+      console.error('Failed to update configuration:', error);
+      throw error;
+    }
   }
 }

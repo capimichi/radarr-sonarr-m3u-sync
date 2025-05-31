@@ -1,38 +1,90 @@
-import React, { useState } from 'react';
-import SearchBar from './SearchBar';
-import SearchResult from './SearchResult';
+import React, { useState, useEffect } from 'react';
+import { useServices } from '../../servicesContext';
+import type SearchResult from '../../types/SearchResult';
+import type SearchResponse from '../../types/response/SearchResponse';
+
 
 interface SearchProps {
-  onSearch: (query: string) => void;
-  results: any[];
+  
 }
 
-const Search: React.FC<SearchProps> = ({ onSearch, results }) => {
+const Search: React.FC<SearchProps> = () => {
   const [query, setQuery] = useState<string>('');
-  
-  const handleQueryChange = (newQuery: string) => {
-    setQuery(newQuery);
-    onSearch(newQuery);
-  };
-  
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { searchService } = useServices();
+
+  useEffect(() => {
+    const performSearch = async () => {
+      if (query.length >= 3) {
+        setIsLoading(true);
+        try {
+          const searchResponse: SearchResponse = await searchService.search(query);
+          setResults(searchResponse.results);
+        } catch (error) {
+          console.error('Errore durante la ricerca:', error);
+        } finally {
+          setIsLoading(false);
+        }
+      } else {
+        setResults([]);
+      }
+    };
+
+    const debounceTimer = setTimeout(performSearch, 300);
+    return () => clearTimeout(debounceTimer);
+  }, [query, searchService]);
+
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <SearchBar query={query} onQueryChange={handleQueryChange} />
-      
-      {results.length > 0 && (
-        <div>
-          <h2 className="text-xl mt-8 mb-5">Results</h2>
-          <div className="flex flex-col gap-4">
-            {results.map(item => (
-              <SearchResult 
-                key={item.id} 
-                title={item.title} 
-                type={item.type} 
-                imageUrl={item.imageUrl}
-              />
-            ))}
-          </div>
+      <div className="mb-6">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Cerca film o serie TV..."
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        {query.length > 0 && query.length < 3 && (
+          <p className="text-sm text-gray-500 mt-1">Inserisci almeno 3 caratteri per cercare</p>
+        )}
+      </div>
+
+      {isLoading ? (
+        <div className="flex justify-center">
+          <p>Caricamento risultati...</p>
         </div>
+      ) : (
+        results.length > 0 && (
+          <div className="space-y-4">
+            <h2 className="text-xl font-semibold">Risultati della ricerca</h2>
+            <ul className="divide-y divide-gray-200">
+              {results.map((result, index) => (
+                <li key={index} className="py-4 flex">
+                  <div className="h-24 w-16 flex-shrink-0">
+                    {result.image && (
+                      <img 
+                        src={result.image} 
+                        alt={result.title} 
+                        className="h-full w-full object-cover"
+                      />
+                    )}
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="font-medium">{result.title}</h3>
+                    <p className="text-sm text-gray-500">
+                      {result.type === 'movie' ? 'Film' : 'Serie TV'}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      )}
+
+      {!isLoading && query.length >= 3 && results.length === 0 && (
+        <p className="text-center py-4">Nessun risultato trovato</p>
       )}
     </div>
   );

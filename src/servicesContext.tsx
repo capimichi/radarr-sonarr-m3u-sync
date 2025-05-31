@@ -2,10 +2,12 @@ import React, { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
 import BackendClient from './clients/BackendClient';
 import SearchService from './services/SearchService';
+import ConfigurationService from './services/ConfigurationService';
 
 // Definizione dell'interfaccia per il contesto dei servizi
 interface ServicesContextType {
   searchService: SearchService;
+  configurationService: ConfigurationService;
 }
 
 // Creazione del contesto React
@@ -24,9 +26,11 @@ export const ServicesProvider: React.FC<ServicesProviderProps> = ({
     // Inizializzazione dei client e dei servizi
     const backendClient = new BackendClient(backendUrl);
     const searchService = new SearchService(backendClient);
+    const configurationService = new ConfigurationService(backendClient);
 
     const services: ServicesContextType = {
         searchService,
+        configurationService,
     };
 
     return (

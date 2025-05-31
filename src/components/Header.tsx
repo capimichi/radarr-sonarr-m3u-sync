@@ -13,7 +13,7 @@ const Header: React.FC = () => {
           </Link>
         </div>
         <div className="settings">
-          <Link to="/settings" className="text-white hover:text-blue-200 transition-colors">
+          <Link to="/app/configurations" className="text-white hover:text-blue-200 transition-colors">
             <FontAwesomeIcon icon={faCog} className="text-xl" />
           </Link>
         </div>

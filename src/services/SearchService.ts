@@ -1,5 +1,5 @@
 import BackendClient from '../clients/BackendClient';
-import type { SearchResult } from '../types/SearchResult';
+import type SearchResponse from '../types/response/SearchResponse';
 
 export default class SearchService {
   private client: BackendClient;
@@ -8,7 +8,7 @@ export default class SearchService {
     this.client = client;
   }
 
-  async search(term: string): Promise<SearchResult[]> {
+  async search(term: string): Promise<SearchResponse> {
     return this.client.search(term);
   }
 }

@@ -1,5 +1,5 @@
-export interface SearchResult {
+export default interface SearchResult {
   title: string;
-  type: 'tv' | 'movie';
+  type: 'series' | 'movie';
   image: string;
 }

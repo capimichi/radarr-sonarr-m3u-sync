@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from radarrsonarrm3usync.container.DefaultContainer import DefaultContainer
 from radarrsonarrm3usync.controller.SearchController import SearchController
 from radarrsonarrm3usync.controller.ConfigurationController import ConfigurationController
+from radarrsonarrm3usync.controller.SeriesController import SeriesController
 import uvicorn
 from starlette.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
@@ -35,11 +36,14 @@ app.add_middleware(
 
 search_controller = default_container.get(SearchController)
 configuration_controller = default_container.get(ConfigurationController)
+series_controller = default_container.get(SeriesController)
 
 # Includiamo il router del SearchController nell'app
 app.include_router(search_controller.router, prefix="/api")
 # Includiamo il router del ConfigurationController nell'app
 app.include_router(configuration_controller.router, prefix="/api")
+# Includiamo il router del SeriesController nell'app
+app.include_router(series_controller.router, prefix="/api")
 
 app.mount("/", StaticFiles(directory="dist", html=True), name="dist")
 

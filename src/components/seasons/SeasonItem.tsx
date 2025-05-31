@@ -130,6 +130,15 @@ const SeasonItem: React.FC<SeasonProps> = ({ season, series }) => {
             }`}>
               {season.monitored ? 'Monitored' : 'Not Monitored'}
             </span>
+            <span className={`px-2 py-1 rounded-full text-xs ${
+              season.statistics.episodeFileCount === season.statistics.totalEpisodeCount
+                ? 'bg-green-100 text-green-800' 
+                : 'bg-amber-100 text-amber-800'
+            }`}>
+              {season.statistics.episodeFileCount === season.statistics.totalEpisodeCount 
+                ? 'Complete' 
+                : `${season.statistics.episodeFileCount}/${season.statistics.totalEpisodeCount} Files`}
+            </span>
           </div>
         </div>
         

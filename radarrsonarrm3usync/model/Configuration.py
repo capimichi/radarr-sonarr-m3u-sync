@@ -8,8 +8,9 @@ class Configuration(BaseModel):
     radarr_enabled: bool = False
     radarr_base_url: str = ""
     radarr_api_key: str = ""
+    radarr_base_dir: str = ""
     
     sonarr_enabled: bool = False
     sonarr_base_url: str = ""
     sonarr_api_key: str = ""
-    
+    sonarr_base_dir: str = ""

@@ -3,6 +3,7 @@ import type SearchResult from '../types/SearchResult';
 import type Configuration from '../types/Configuration';
 import type SearchResponse from '../types/response/SearchResponse';
 import type Series from '../types/Series';
+import type Episode from '../types/Episode';
 
 export default class BackendClient {
   private backendUrl: string;
@@ -98,6 +99,89 @@ export default class BackendClient {
       return await response.json() as Series;
     } catch (error) {
       console.error(`Failed to fetch series with id ${id}:`, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Fetches episodes for a specific season of a series
+   * @param seriesId The series ID
+   * @param seasonNumber The season number
+   * @returns Promise with the episodes array
+   */
+  async getSeasonEpisodes(seriesId: number, seasonNumber: number): Promise<Episode[]> {
+    try {
+      const response = await fetch(`${this.backendUrl}/api/series/${seriesId}/episodes?season_number=${seasonNumber}&include_episode_file=true`, {
+        method: 'GET',
+        headers: {
+          'accept': 'application/json'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Error fetching episodes: ${response.status} ${response.statusText}`);
+      }
+      
+      return await response.json() as Episode[];
+    } catch (error) {
+      console.error(`Failed to fetch episodes for series ${seriesId}, season ${seasonNumber}:`, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Downloads a video from an m3u8 URL to the specified path
+   * @param url The m3u8 URL to download from
+   * @param path The path where to save the downloaded video
+   * @param onProgress Optional callback for progress updates
+   * @returns Promise that resolves when download is complete
+   */
+  async downloadM3u8(
+    url: string, 
+    path: string, 
+    onProgress?: (progress: { progress: number; completed: boolean }) => void
+  ): Promise<void> {
+    try {
+      const downloadUrl = `${this.backendUrl}/api/download/?url=${encodeURIComponent(url)}&path=${encodeURIComponent(path)}`;
+      
+      const response = await fetch(downloadUrl, {
+        method: 'POST',
+        headers: {
+          'accept': 'application/json'
+        }
+      });
+      
+      if (!response.ok || !response.body) {
+        throw new Error(`Error downloading video: ${response.status} ${response.statusText}`);
+      }
+      
+      // Process the streaming response
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        
+        const decodedChunk = decoder.decode(value, { stream: true });
+        const lines = decodedChunk.split('\n').filter(line => line.trim() !== '');
+        
+        for (const line of lines) {
+          try {
+            const data = JSON.parse(line);
+            if (onProgress && typeof data.progress === 'number') {
+              onProgress({ 
+                progress: data.progress, 
+                completed: !!data.completed 
+              });
+            }
+          } catch (e) {
+            console.warn('Could not parse progress data:', line);
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Download request failed:', error);
       throw error;
     }
   }

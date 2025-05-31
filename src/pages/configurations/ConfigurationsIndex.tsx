@@ -8,9 +8,11 @@ const ConfigurationsIndex: React.FC = () => {
     radarr_enabled: false,
     radarr_base_url: '',
     radarr_api_key: '',
+    radarr_base_dir: '',
     sonarr_enabled: false,
     sonarr_base_url: '',
     sonarr_api_key: '',
+    sonarr_base_dir: '',
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -123,6 +125,19 @@ const ConfigurationsIndex: React.FC = () => {
               disabled={!configuration.radarr_enabled}
             />
           </div>
+          
+          <div className="mb-4">
+            <label className="block mb-1">Directory Base</label>
+            <input
+              type="text"
+              name="radarr_base_dir"
+              value={configuration.radarr_base_dir}
+              onChange={handleInputChange}
+              className="w-full p-2 border rounded"
+              placeholder="/path/to/movies"
+              disabled={!configuration.radarr_enabled}
+            />
+          </div>
         </div>
         
         {/* Sonarr Configuration */}
@@ -164,6 +179,19 @@ const ConfigurationsIndex: React.FC = () => {
               onChange={handleInputChange}
               className="w-full p-2 border rounded"
               placeholder="API Key"
+              disabled={!configuration.sonarr_enabled}
+            />
+          </div>
+          
+          <div className="mb-4">
+            <label className="block mb-1">Directory Base</label>
+            <input
+              type="text"
+              name="sonarr_base_dir"
+              value={configuration.sonarr_base_dir}
+              onChange={handleInputChange}
+              className="w-full p-2 border rounded"
+              placeholder="/path/to/tvshows"
               disabled={!configuration.sonarr_enabled}
             />
           </div>

@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import List, Optional
 from enum import Enum
 from pydantic import BaseModel
+from radarrsonarrm3usync.model.MediaCover import MediaCover
 
 
 # Enum types
@@ -32,13 +33,6 @@ class AlternateTitleResource(BaseModel):
 class Language(BaseModel):
     id: Optional[int] = None
     name: Optional[str] = None
-
-
-class MediaCover(BaseModel):
-    coverType: str
-    url: str
-    remoteUrl: Optional[str] = None
-
 
 class SeasonStatisticsResource(BaseModel):
     previousAiring: Optional[datetime] = None

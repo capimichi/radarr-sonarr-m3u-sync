@@ -4,6 +4,7 @@ from typing import Dict, Any, List, Optional
 
 from radarrsonarrm3usync.config.DefaultConfig import DefaultConfig
 from radarrsonarrm3usync.model.SeriesResource import SeriesResource
+from radarrsonarrm3usync.model.EpisodeResource import EpisodeResource
 
 
 class SonarrClient:
@@ -18,6 +19,7 @@ class SonarrClient:
             
     def get_series(self) -> List[SeriesResource]:
         """Get all series from Sonarr."""
+
         if not self.enabled:
             return []
         
@@ -52,6 +54,31 @@ class SonarrClient:
         response.raise_for_status()
         data = response.json()
         return SeriesResource.model_validate(data) if data else None
+
+    def get_episodes(self, series_id: int, season_number: int, includeEpisodeFile = False) -> List[EpisodeResource]:
+        """Get episodes for a specific series and season."""
+        if not self.enabled:
+            return []
+        
+        self._check_configuration()
+            
+        response = requests.get(
+            f"{self.base_url.rstrip('/')}/api/v3/episode",
+            headers={"X-Api-Key": self.api_key},
+            params={
+                "seriesId": series_id, 
+                "seasonNumber": season_number,
+                "includeEpisodeFile": "true" if includeEpisodeFile else "false"
+                },
+            timeout=10
+        )
+        response.raise_for_status()
+        data = response.json()
+        objs = []
+        for item in data:
+            episode: EpisodeResource = EpisodeResource.model_validate(item)
+            objs.append(episode)
+        return objs
 
     def _check_configuration(self):
         """Check if Sonarr is enabled and configured properly."""

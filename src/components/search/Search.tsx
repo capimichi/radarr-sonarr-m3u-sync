@@ -62,7 +62,7 @@ const Search: React.FC<SearchProps> = () => {
             <ul className="divide-y divide-gray-200">
               {results.map((result, index) => (
                 <li key={index} className="py-4 flex">
-                  <div className="h-24 w-16 flex-shrink-0">
+                  <div className="h-auto w-32 flex-shrink-0">
                     {result.image && (
                       <img 
                         src={result.image} 

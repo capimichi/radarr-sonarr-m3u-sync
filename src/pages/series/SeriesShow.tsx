@@ -117,7 +117,7 @@ const SeriesShow: React.FC = () => {
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Seasons</h2>
             <div className="space-y-3">
               {series.seasons.map((season) => (
-                <SeasonItem key={season.seasonNumber} season={season} seriesId={series.id} />
+                <SeasonItem key={season.seasonNumber} season={season} series={series} />
               ))}
             </div>
           </div>

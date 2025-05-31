@@ -168,7 +168,13 @@ export default class BackendClient {
         
         for (const line of lines) {
           try {
-            const data = JSON.parse(line);
+            // Handle lines that start with "data: "
+            let jsonStr = line;
+            if (line.startsWith('data:')) {
+              jsonStr = line.substring(5).trim();
+            }
+            
+            const data = JSON.parse(jsonStr);
             if (onProgress && typeof data.progress === 'number') {
               onProgress({ 
                 progress: data.progress, 

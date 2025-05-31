@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import type Season from '../../types/Season';
 import type Episode from '../../types/Episode';
+import type Configuration from '../../types/Configuration';
 import { useServices } from '../../servicesContext';
+import type Series from '../../types/Series';
 
 interface SeasonProps {
-    seriesId?: number; // Optional, if needed for context
-  season: Season;
+    season: Season;
+    series: Series;
 }
 
-const SeasonItem: React.FC<SeasonProps> = ({ season, seriesId }) => {
-  const { seriesService, downloadService } = useServices();
+const SeasonItem: React.FC<SeasonProps> = ({ season, series }) => {
+  const { seriesService, downloadService, configurationService } = useServices();
+  const seriesId = series.id;
   const [episodes, setEpisodes] = useState<Episode[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isEpisodesExpanded, setIsEpisodesExpanded] = useState(false);
@@ -17,6 +20,20 @@ const SeasonItem: React.FC<SeasonProps> = ({ season, seriesId }) => {
   const [downloadPaths, setDownloadPaths] = useState<Record<number, string>>({});
   const [downloadProgress, setDownloadProgress] = useState<Record<number, number>>({});
   const [isDownloading, setIsDownloading] = useState<Record<number, boolean>>({});
+  const [configuration, setConfiguration] = useState<Configuration | null>(null);
+
+  useEffect(() => {
+    const fetchConfiguration = async () => {
+      try {
+        const config = await configurationService.getConfiguration();
+        setConfiguration(config);
+      } catch (error) {
+        console.error('Error fetching configuration:', error);
+      }
+    };
+    
+    fetchConfiguration();
+  }, []);
 
   const fetchEpisodes = async () => {
     if (!seriesId) return;
@@ -36,6 +53,21 @@ const SeasonItem: React.FC<SeasonProps> = ({ season, seriesId }) => {
     fetchEpisodes();
   }, [seriesId, season.seasonNumber]);
 
+  const buildFilePath = (episode: Episode): string => {
+    let path = configuration!.sonarr_base_dir;
+
+    path = path.endsWith('/') ? path : `${path}/`;
+
+    const slug = series!.titleSlug;
+
+    path += series!.path.replace(series!.rootFolderPath, '');
+    path = path.endsWith('/') ? path : `${path}/`;
+    path += `Season ${season.seasonNumber.toString()}/`;
+    path += `${slug}-s${season.seasonNumber.toString().padStart(2, '0')}e${episode.episodeNumber.toString().padStart(2, '0')}.mp4`;
+    return path;
+
+  };
+
   const handleM3u8UrlChange = (episodeId: number, url: string) => {
     setM3u8Urls(prev => ({
       ...prev,
@@ -52,9 +84,12 @@ const SeasonItem: React.FC<SeasonProps> = ({ season, seriesId }) => {
 
   const handleDownload = async (episodeId: number) => {
     const url = m3u8Urls[episodeId];
-    // Default download path if not specified
-    const path = downloadPaths[episodeId] || `/Users/michele/Downloads/episode_${episodeId}.mp4`;
+    const episode = episodes.find(ep => ep.id === episodeId);
     
+    // Get the path from state or build default path
+    const path = downloadPaths[episodeId] || 
+      (episode ? buildFilePath(episode) : `/Users/michele/Downloads/episode_${episodeId}.mp4`);
+
     if (!url) return;
 
     setIsDownloading(prev => ({ ...prev, [episodeId]: true }));
@@ -191,7 +226,7 @@ const SeasonItem: React.FC<SeasonProps> = ({ season, seriesId }) => {
                           <input
                             type="text"
                             placeholder="Enter save path... (e.g. /Users/michele/Downloads/video.mp4)"
-                            value={downloadPaths[episode.id] || ''}
+                            value={downloadPaths[episode.id] || buildFilePath(episode)}
                             onChange={(e) => handleDownloadPathChange(episode.id, e.target.value)}
                             className="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           />

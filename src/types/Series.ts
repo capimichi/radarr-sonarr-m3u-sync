@@ -22,6 +22,7 @@ export default interface Series {
   status: string;
   year: number;
   path: string;
+  titleSlug: string;
   rootFolderPath: string;
   statistics: Statistics;
   images: Image[];

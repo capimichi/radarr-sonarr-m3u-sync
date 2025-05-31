@@ -107,6 +107,10 @@ class DownloadService:
             raise Exception("No matching file found in temporary download directory")
         template_path = os.path.join(temp_download_dir, template_file)
 
+        path_dir = os.path.dirname(path)
+        if not os.path.exists(path_dir):
+            os.makedirs(path_dir)
+
         command = [
             'ffmpeg',
             '-i', template_path,

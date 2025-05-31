@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useServices } from '../../servicesContext';
 import type SearchResult from '../../types/SearchResult';
 import type SearchResponse from '../../types/response/SearchResponse';
+import { Link } from 'react-router-dom';
 
 
 interface SearchProps {
@@ -71,7 +72,13 @@ const Search: React.FC<SearchProps> = () => {
                     )}
                   </div>
                   <div className="ml-4">
-                    <h3 className="font-medium">{result.title}</h3>
+                    {result.type === 'series' ? (
+                      <Link to={`/app/series/${result.id}/show`} className="hover:text-blue-600">
+                        <h3 className="font-medium">{result.title}</h3>
+                      </Link>
+                    ) : (
+                      <h3 className="font-medium">{result.title}</h3>
+                    )}
                     <p className="text-sm text-gray-500">
                       {result.type === 'movie' ? 'Film' : 'Serie TV'}
                     </p>

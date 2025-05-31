@@ -2,6 +2,7 @@
 import type SearchResult from '../types/SearchResult';
 import type Configuration from '../types/Configuration';
 import type SearchResponse from '../types/response/SearchResponse';
+import type Series from '../types/Series';
 
 export default class BackendClient {
   private backendUrl: string;
@@ -72,6 +73,31 @@ export default class BackendClient {
       return await response.json() as Configuration;
     } catch (error) {
       console.error('Failed to update configuration:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Fetches a series by its ID
+   * @param id The series ID to fetch
+   * @returns Promise with the series object
+   */
+  async getSeries(id: number): Promise<Series> {
+    try {
+      const response = await fetch(`${this.backendUrl}/api/series/${id}`, {
+        method: 'GET',
+        headers: {
+          'accept': 'application/json'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Error fetching series: ${response.status} ${response.statusText}`);
+      }
+      
+      return await response.json() as Series;
+    } catch (error) {
+      console.error(`Failed to fetch series with id ${id}:`, error);
       throw error;
     }
   }

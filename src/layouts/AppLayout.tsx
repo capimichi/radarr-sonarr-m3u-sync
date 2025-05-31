@@ -11,7 +11,9 @@ const AppLayout: React.FC<AppLayoutProps> = () => {
       <div className="">
         <Header />
         <main className="max-w-[768px] mx-auto my-7">
-          <Outlet />
+          <div className="min-h-screen">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>

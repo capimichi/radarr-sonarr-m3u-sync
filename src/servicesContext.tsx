@@ -3,11 +3,13 @@ import type { ReactNode } from 'react';
 import BackendClient from './clients/BackendClient';
 import SearchService from './services/SearchService';
 import ConfigurationService from './services/ConfigurationService';
+import SeriesService from './services/SeriesService';
 
 // Definizione dell'interfaccia per il contesto dei servizi
 interface ServicesContextType {
   searchService: SearchService;
   configurationService: ConfigurationService;
+  seriesService: SeriesService;
 }
 
 // Creazione del contesto React
@@ -27,10 +29,12 @@ export const ServicesProvider: React.FC<ServicesProviderProps> = ({
     const backendClient = new BackendClient(backendUrl);
     const searchService = new SearchService(backendClient);
     const configurationService = new ConfigurationService(backendClient);
+    const seriesService = new SeriesService(backendClient);
 
     const services: ServicesContextType = {
         searchService,
         configurationService,
+        seriesService,
     };
 
     return (

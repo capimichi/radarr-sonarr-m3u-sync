@@ -4,11 +4,9 @@ import Search from '../../components/search/Search';
 const AppIndex: React.FC = () => {
   
   return (
-    <div className="min-h-screen">
-      <main>
-        <Search />
-      </main>
-    </div>
+    <>
+      <Search />
+    </>
   );
 };
 

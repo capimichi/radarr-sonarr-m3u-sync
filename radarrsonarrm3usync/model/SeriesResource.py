@@ -37,6 +37,7 @@ class Language(BaseModel):
 class MediaCover(BaseModel):
     coverType: str
     url: str
+    remoteUrl: Optional[str] = None
 
 
 class SeasonStatisticsResource(BaseModel):

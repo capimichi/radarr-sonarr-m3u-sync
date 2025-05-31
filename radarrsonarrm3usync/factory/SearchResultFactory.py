@@ -17,6 +17,7 @@ class SearchResultFactory:
                     break
             
         return SearchResult(
+            id=series.id,
             title=series.title or "",
             type="series",
             image=image

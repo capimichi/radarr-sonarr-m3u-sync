@@ -1,10 +1,8 @@
 import { createHashRouter, RouterProvider, Navigate } from 'react-router-dom';
 import AppLayout from './layouts/AppLayout';
 import AppIndex from './pages/index/AppIndex'; // Corrected path
-import VehiclesIndex from './pages/vehicles/VehiclesIndex';
-import VehiclesCreate from './pages/vehicles/VehiclesCreate';
-import VehiclesEdit from './pages/vehicles/VehiclesEdit';
 import ConfigurationsIndex from './pages/configurations/ConfigurationsIndex';
+import SeriesShow from './pages/series/SeriesShow';
 
 const router = createHashRouter([
 	{
@@ -20,16 +18,8 @@ const router = createHashRouter([
 			element: <AppIndex />,
 		},
 		{
-			path: 'vehicles',
-			element: <VehiclesIndex />,
-		},
-		{
-			path: 'vehicle/new',
-			element: <VehiclesCreate />,
-		},
-		{
-			path: 'vehicle/:id/show',
-			element: <VehiclesEdit />,
+			path: 'series/:id/show',
+			element: <SeriesShow />,
 		},
 		{
 			path: 'configurations',
@@ -37,10 +27,6 @@ const router = createHashRouter([
 		},
 		// Add more dashboard routes here as needed
 		],
-	},
-	{
-		path: '*',
-		element: <Navigate to="/login" replace />,
 	},
 ]);
 

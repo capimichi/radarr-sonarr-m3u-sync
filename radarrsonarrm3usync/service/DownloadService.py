@@ -113,6 +113,7 @@ class DownloadService:
 
         command = [
             'ffmpeg',
+            '-y',  # Add overwrite flag
             '-i', template_path,
             '-c', 'copy',
             path

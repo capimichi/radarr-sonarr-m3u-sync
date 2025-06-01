@@ -242,11 +242,14 @@ const SeasonItem: React.FC<SeasonProps> = ({ season, series }) => {
                         </div>
                         
                         {isDownloading[episode.id] && (
-                          <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div
-                              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                              style={{ width: `${downloadProgress[episode.id] || 0}%` }}
-                            ></div>
+                          <div className="flex items-center space-x-2">
+                            <span className="text-xs text-gray-600 w-12">{Math.round(downloadProgress[episode.id] || 0)}%</span>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                              <div
+                                className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                                style={{ width: `${downloadProgress[episode.id] || 0}%` }}
+                              ></div>
+                            </div>
                           </div>
                         )}
                       </div>

@@ -30,12 +30,9 @@ class DownloadService:
         if not os.path.exists(path_dir):
             os.makedirs(path_dir)
 
-        template_path = path.replace(".mp4", ".%(ext)s")
+        template_path = path.replace(".mp4", ".%(ext)s").replace(".mkv", ".%(ext)s")
         log_file = f"{path}.log"
 
-        temp_download_dir = tempfile.mkdtemp(prefix='radarrsonarrm3usync_download_')
-        template_path = os.path.join(temp_download_dir, "output.%(ext)s")
-        
         # Create command with output redirection to log file
         command = [
             'yt-dlp',
@@ -99,37 +96,4 @@ class DownloadService:
         except:
             pass
 
-        # use ffmpeg to convert the file to path
-        # search files in temp dir
-        files = os.listdir(temp_download_dir)
-        if not files:
-            raise Exception("No files downloaded")
         
-        # Find the first file that matches the template
-        template_file = next((f for f in files if re.match(r'output\.\w+', f)), None)
-        if not template_file:
-            raise Exception("No matching file found in temporary download directory")
-        template_path = os.path.join(temp_download_dir, template_file)
-
-        command = [
-            'ffmpeg',
-            '-y',  # Add overwrite flag
-            '-i', template_path,
-            '-c', 'copy',
-            path
-        ]
-
-        # Run the ffmpeg command
-        ffmpeg_process = subprocess.Popen(
-            command,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
-        )
-        ffmpeg_output, ffmpeg_error = ffmpeg_process.communicate()
-        if ffmpeg_process.returncode != 0:
-            raise Exception(f"FFmpeg conversion failed: {ffmpeg_error}")
-        
-        if os.path.exists(template_path):
-            os.remove(template_path)
-

@@ -5,7 +5,7 @@ import { faCog } from '@fortawesome/free-solid-svg-icons';
 
 const Header: React.FC = () => {
   return (
-    <header className=" mx-auto bg-blue-800 text-white flex items-center justify-between p-4 shadow-md">
+    <header className=" mx-auto bg-header text-white flex items-center justify-between p-4 shadow-md">
       <div className="max-w-[768px] mx-auto w-full flex items-center justify-between">
         <div className="logo">
           <Link to="/" className="no-underline text-white">

@@ -1,9 +1,5 @@
 import BackendClient from '@/clients/BackendClient';
-
-export interface DownloadProgress {
-  progress: number;
-  completed: boolean;
-}
+import type DownloadProgress from '@/types/DownloadProgress';
 
 export default class DownloadService {
   private client: BackendClient;

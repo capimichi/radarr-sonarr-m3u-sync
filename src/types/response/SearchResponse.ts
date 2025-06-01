@@ -1,4 +1,5 @@
-import type SearchResult from "../SearchResult";
+import type SearchResult from "@/types/SearchResult";
+
 
 
 export default interface SearchResponse {

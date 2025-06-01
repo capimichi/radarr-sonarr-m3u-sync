@@ -1,9 +1,8 @@
 // Placeholder BackendClient
-import type SearchResult from '../types/SearchResult';
-import type Configuration from '../types/Configuration';
-import type SearchResponse from '../types/response/SearchResponse';
-import type Series from '../types/Series';
-import type Episode from '../types/Episode';
+import type Configuration from '@/types/Configuration';
+import type SearchResponse from '@/types/response/SearchResponse';
+import type Series from '@/types/Series';
+import type Episode from '@/types/Episode';
 
 export default class BackendClient {
   private backendUrl: string;

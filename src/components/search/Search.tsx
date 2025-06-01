@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useServices } from '../../servicesContext';
-import type SearchResult from '../../types/SearchResult';
-import type SearchResponse from '../../types/response/SearchResponse';
+import { useServices } from '@/servicesContext';
+import type SearchResult from '@/types/SearchResult';
+import type SearchResponse from '@/types/response/SearchResponse';
 import { Link } from 'react-router-dom';
 
 

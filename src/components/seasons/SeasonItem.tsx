@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import type Season from '../../types/Season';
-import type Episode from '../../types/Episode';
-import type Configuration from '../../types/Configuration';
-import { useServices } from '../../servicesContext';
-import type Series from '../../types/Series';
+import type Season from '@/types/Season';
+import type Episode from '@/types/Episode';
+import type Configuration from '@/types/Configuration';
+import { useServices } from '@/servicesContext';
+import type Series from '@/types/Series';
 import SeasonHeader from './SeasonHeader';
 import SeasonStats from './SeasonStats';
 import EpisodeList from './EpisodeList';

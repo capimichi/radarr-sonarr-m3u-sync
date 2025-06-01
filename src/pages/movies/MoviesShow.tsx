@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AppLayout from '../../layouts/AppLayout';
+import AppLayout from '@/layouts/AppLayout';
 
 interface Movie {
   id: number;

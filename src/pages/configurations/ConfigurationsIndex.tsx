@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useServices } from '../../servicesContext';
-import type Configuration from '../../types/Configuration';
+import { useServices } from '@/servicesContext';
+import type Configuration from '@/types/Configuration';
 
 const ConfigurationsIndex: React.FC = () => {
   const { configurationService } = useServices();

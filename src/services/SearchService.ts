@@ -1,5 +1,5 @@
-import BackendClient from '../clients/BackendClient';
-import type SearchResponse from '../types/response/SearchResponse';
+import BackendClient from '@/clients/BackendClient';
+import type SearchResponse from '@/types/response/SearchResponse';
 
 export default class SearchService {
   private client: BackendClient;

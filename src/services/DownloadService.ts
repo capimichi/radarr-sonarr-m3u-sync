@@ -1,4 +1,4 @@
-import BackendClient from '../clients/BackendClient';
+import BackendClient from '@/clients/BackendClient';
 
 export interface DownloadProgress {
   progress: number;

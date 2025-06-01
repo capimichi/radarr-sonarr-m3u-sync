@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Search from '../../components/search/Search';
+import React from 'react';
+import Search from '@/components/search/Search';
 
 const AppIndex: React.FC = () => {
   

@@ -1,6 +1,6 @@
-import BackendClient from '../clients/BackendClient';
-import type Series from '../types/Series';
-import type Episode from '../types/Episode';
+import BackendClient from '@/clients/BackendClient';
+import type Series from '@/types/Series';
+import type Episode from '@/types/Episode';
 
 export default class SeriesService {
   private client: BackendClient;

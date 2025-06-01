@@ -1,5 +1,5 @@
 import React from 'react';
-import type Episode from '../../types/Episode';
+import type Episode from '@/types/Episode';
 import DownloadControl from './DownloadControl';
 
 interface EpisodeItemProps {

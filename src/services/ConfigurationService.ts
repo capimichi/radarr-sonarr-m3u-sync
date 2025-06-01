@@ -1,5 +1,5 @@
-import BackendClient from '../clients/BackendClient';
-import type Configuration from '../types/Configuration';
+import BackendClient from '@/clients/BackendClient';
+import type Configuration from '@/types/Configuration';
 
 export default class ConfigurationService {
   private client: BackendClient;

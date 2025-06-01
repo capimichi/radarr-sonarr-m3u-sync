@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import AppLayout from '../../layouts/AppLayout';
-import { useServices } from '../../servicesContext';
-import type Series from '../../types/Series';
-import SeasonItem from '../../components/seasons/SeasonItem';
+import { useServices } from '@/servicesContext';
+import type Series from '@/types/Series';
+import SeasonItem from '@/components/seasons/SeasonItem';
 
 const SeriesShow: React.FC = () => {
   const { id } = useParams<{ id: string }>();

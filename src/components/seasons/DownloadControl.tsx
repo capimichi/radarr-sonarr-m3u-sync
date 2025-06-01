@@ -1,5 +1,5 @@
 import React from 'react';
-import type Episode from '../../types/Episode';
+import type Episode from '@/types/Episode';
 
 interface DownloadControlProps {
   episode: Episode;
@@ -23,7 +23,7 @@ const DownloadControl: React.FC<DownloadControlProps> = ({
   onDownload,
 }) => {
   return (
-    <div className="mt-3 space-y-2">
+    <div className="mt-3 space-y-2" data-id={`download-control-${episode.id}`}>
       <div className="flex items-center space-x-2">
         <input
           type="text"

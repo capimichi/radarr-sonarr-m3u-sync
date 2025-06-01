@@ -1,5 +1,5 @@
 import React from 'react';
-import type Season from '../../types/Season';
+import type Season from '@/types/Season';
 
 interface SeasonStatsProps {
   season: Season;

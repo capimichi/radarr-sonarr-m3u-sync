@@ -30,7 +30,7 @@ const SeriesShow: React.FC = () => {
   }, [id, seriesService]);
 
   return (
-    <div className="p-6">
+    <>
       {loading && (
         <div className="flex justify-center items-center h-64">
           <p className="text-lg">Loading...</p>
@@ -123,7 +123,7 @@ const SeriesShow: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

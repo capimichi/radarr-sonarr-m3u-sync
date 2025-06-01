@@ -26,6 +26,10 @@ class DownloadService:
             Dictionary containing progress information
         """
 
+        path_dir = os.path.dirname(path)
+        if not os.path.exists(path_dir):
+            os.makedirs(path_dir)
+
         template_path = path.replace(".mp4", ".%(ext)s")
         log_file = f"{path}.log"
 
@@ -106,10 +110,6 @@ class DownloadService:
         if not template_file:
             raise Exception("No matching file found in temporary download directory")
         template_path = os.path.join(temp_download_dir, template_file)
-
-        path_dir = os.path.dirname(path)
-        if not os.path.exists(path_dir):
-            os.makedirs(path_dir)
 
         command = [
             'ffmpeg',

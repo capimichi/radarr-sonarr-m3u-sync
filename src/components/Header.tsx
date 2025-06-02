@@ -9,7 +9,7 @@ const Header: React.FC = () => {
       <div className="max-w-[768px] mx-auto w-full flex items-center justify-between">
         <div className="logo">
           <Link to="/" className="no-underline text-white">
-            <h1 className="text-xl font-bold m-0">Streamr</h1>
+            <h1 className="text-xl font-bold m-0">Radarr Sonarr m3u sync</h1>
           </Link>
         </div>
         <div className="settings">

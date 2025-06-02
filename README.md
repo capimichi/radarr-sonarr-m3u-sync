@@ -71,7 +71,7 @@ pip install -r requirements.txt
 # Start the backend server
 python -m radarrsonarrm3usync.api
 ```
-The backend will be available at `http://localhost:8000`
+The backend swagger will be available at `http://localhost:8958/docs`
 
 ### 3. Frontend Setup
 ```bash
@@ -81,7 +81,7 @@ npm install
 # Start the development server
 npm run dev
 ```
-The frontend will be available at `http://localhost:5173`
+The frontend will be available at `http://localhost:8958`
 
 ### 4. Production Build
 ```bash
@@ -160,6 +160,11 @@ Configuration is saved in `~/.radarr-sonarr-m3u-sync/config.json`
 - **Tailwind CSS** - Styling
 - **React Router** - Routing
 - **Vite** - Build tool
+
+## 📋 TODO
+
+- [ ] Add configuration to change backend port
+- [ ] Add the Radarr integration
 
 ## 📝 Contributing
 

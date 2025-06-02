@@ -4,14 +4,12 @@ import BackendClient from './clients/BackendClient';
 import SearchService from './services/SearchService';
 import ConfigurationService from './services/ConfigurationService';
 import SeriesService from './services/SeriesService';
-import DownloadService from './services/DownloadService';
 
 // Definizione dell'interfaccia per il contesto dei servizi
 interface ServicesContextType {
   searchService: SearchService;
   configurationService: ConfigurationService;
   seriesService: SeriesService;
-  downloadService: DownloadService;
 }
 
 // Creazione del contesto React
@@ -32,13 +30,11 @@ export const ServicesProvider: React.FC<ServicesProviderProps> = ({
     const searchService = new SearchService(backendClient);
     const configurationService = new ConfigurationService(backendClient);
     const seriesService = new SeriesService(backendClient);
-    const downloadService = new DownloadService(backendClient);
 
     const services: ServicesContextType = {
         searchService,
         configurationService,
         seriesService,
-        downloadService,
     };
 
     return (

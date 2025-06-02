@@ -9,7 +9,6 @@ export default class BackendClient {
 
   constructor(backendUrl: string) {
     this.backendUrl = backendUrl;
-    console.log('BackendClient initialized with URL:', backendUrl);
   }
 
   async search(term: string): Promise<SearchResponse> {

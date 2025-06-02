@@ -59,7 +59,7 @@ radarr-sonarr-m3u-sync/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/radarr-sonarr-m3u-sync.git
+git clone https://github.com/capimichi/radarr-sonarr-m3u-sync.git
 cd radarr-sonarr-m3u-sync
 ```
 

@@ -1,191 +1,191 @@
 # Radarr Sonarr m3u sync - Radarr/Sonarr M3U8 Sync Tool
 
-🎬 **Radarr Sonarr m3u sync** è un'applicazione web full-stack che consente di sincronizzare film e serie TV dai tuoi server Radarr e Sonarr e scaricare episodi da link M3U8.
+🎬 **Radarr Sonarr m3u sync** is a full-stack web application that allows you to sync movies and TV series from your Radarr and Sonarr servers and download episodes from M3U8 links.
 
-## 🌟 Caratteristiche Principali
+## 🌟 Key Features
 
-- **Gestione Unificata**: Interfaccia web moderna per gestire Radarr e Sonarr
-- **Ricerca Intelligente**: Ricerca globale attraverso film e serie TV
-- **Download M3U8**: Download diretto di episodi da link M3U8 con progresso in tempo reale
-- **Integrazione Nativa**: Integrazione completa con le API di Radarr e Sonarr
-- **Interface Responsive**: UI mobile-friendly con design moderno
-- **Configurazione Semplice**: Setup guidato per Radarr e Sonarr
+- **Unified Management**: Modern web interface for managing Radarr and Sonarr
+- **Smart Search**: Global search across movies and TV series
+- **M3U8 Download**: Direct episode downloads from M3U8 links with real-time progress
+- **Native Integration**: Complete integration with Radarr and Sonarr APIs
+- **Responsive Interface**: Mobile-friendly UI with modern design
+- **Simple Configuration**: Guided setup for Radarr and Sonarr
 
-## 🏗️ Architettura
+## 🏗️ Architecture
 
 ### Backend (Python)
-- **FastAPI**: Framework web moderno per le API REST
-- **Dependency Injection**: Gestione delle dipendenze con Injector
-- **yt-dlp**: Download di contenuti M3U8 con supporto per il progresso
-- **Client API**: Client dedicati per Radarr e Sonarr
-- **Streaming**: Download con aggiornamenti di progresso in tempo reale
+- **FastAPI**: Modern web framework for REST APIs
+- **Dependency Injection**: Dependency management with Injector
+- **yt-dlp**: M3U8 content download with progress support
+- **API Clients**: Dedicated clients for Radarr and Sonarr
+- **Streaming**: Downloads with real-time progress updates
 
 ### Frontend (React + TypeScript)
-- **React 19**: Framework UI moderno con TypeScript
-- **React Router**: Navigazione client-side
-- **Tailwind CSS**: Sistema di design utility-first
-- **FontAwesome**: Icone moderne
-- **Vite**: Build tool veloce per sviluppo e produzione
+- **React 19**: Modern UI framework with TypeScript
+- **React Router**: Client-side navigation
+- **Tailwind CSS**: Utility-first design system
+- **FontAwesome**: Modern icons
+- **Vite**: Fast build tool for development and production
 
-## 📁 Struttura del Progetto
+## 📁 Project Structure
 
 ```
 radarr-sonarr-m3u-sync/
-├── radarrsonarrm3usync/          # Backend Python
-│   ├── api.py                    # Applicazione FastAPI principale
-│   ├── client/                   # Client API (Radarr, Sonarr)
-│   ├── config/                   # Gestione configurazione
-│   ├── controller/               # Controller API
-│   ├── service/                  # Logica di business
-│   ├── model/                    # Modelli dati
-│   └── helper/                   # Utility (M3U download)
-├── src/                          # Frontend React
-│   ├── components/               # Componenti React
-│   ├── pages/                    # Pagine dell'applicazione
-│   ├── services/                 # Client API frontend
-│   ├── types/                    # Tipi TypeScript
-│   └── utils/                    # Utility frontend
-├── package.json                  # Dipendenze Node.js
-├── requirements.txt              # Dipendenze Python
-└── vite.config.ts               # Configurazione Vite
+├── radarrsonarrm3usync/          # Python Backend
+│   ├── api.py                    # Main FastAPI application
+│   ├── client/                   # API clients (Radarr, Sonarr)
+│   ├── config/                   # Configuration management
+│   ├── controller/               # API controllers
+│   ├── service/                  # Business logic
+│   ├── model/                    # Data models
+│   └── helper/                   # Utilities (M3U download)
+├── src/                          # React Frontend
+│   ├── components/               # React components
+│   ├── pages/                    # Application pages
+│   ├── services/                 # Frontend API client
+│   ├── types/                    # TypeScript types
+│   └── utils/                    # Frontend utilities
+├── package.json                  # Node.js dependencies
+├── requirements.txt              # Python dependencies
+└── vite.config.ts               # Vite configuration
 ```
 
-## 🚀 Installazione e Setup
+## 🚀 Installation and Setup
 
-### Prerequisiti
+### Prerequisites
 - Python 3.10+
 - Node.js 18+
-- Radarr e/o Sonarr in esecuzione (opzionale)
+- Radarr and/or Sonarr running (optional)
 
-### 1. Clona il Repository
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/your-username/radarr-sonarr-m3u-sync.git
 cd radarr-sonarr-m3u-sync
 ```
 
-### 2. Setup Backend
+### 2. Backend Setup
 ```bash
-# Installa le dipendenze Python
+# Install Python dependencies
 pip install -r requirements.txt
 
-# Avvia il server backend
+# Start the backend server
 python -m radarrsonarrm3usync.api
 ```
-Il backend sarà disponibile su `http://localhost:8000`
+The backend will be available at `http://localhost:8000`
 
-### 3. Setup Frontend
+### 3. Frontend Setup
 ```bash
-# Installa le dipendenze Node.js
+# Install Node.js dependencies
 npm install
 
-# Avvia il server di sviluppo
+# Start the development server
 npm run dev
 ```
-Il frontend sarà disponibile su `http://localhost:5173`
+The frontend will be available at `http://localhost:5173`
 
-### 4. Build per Produzione
+### 4. Production Build
 ```bash
-# Build del frontend
+# Build the frontend
 npm run build
 
-# Il backend servirà automaticamente i file statici dalla cartella dist/
+# The backend will automatically serve static files from the dist/ folder
 python -m radarrsonarrm3usync.api
 ```
 
-## ⚙️ Configurazione
+## ⚙️ Configuration
 
-### Prima Configurazione
-1. Apri l'applicazione nel browser
-2. Vai su **Configurazioni** (icona ingranaggio)
-3. Configura Radarr e/o Sonarr:
-   - **URL Base**: L'indirizzo del tuo server (es. `http://localhost:7878`)
-   - **API Key**: La chiave API del server
-   - **Directory Base**: La cartella dove salvare i download
+### Initial Setup
+1. Open the application in your browser
+2. Go to **Settings** (gear icon)
+3. Configure Radarr and/or Sonarr:
+   - **Base URL**: Your server address (e.g., `http://localhost:7878`)
+   - **API Key**: The server's API key
+   - **Base Directory**: The folder where downloads will be saved
 
-### File di Configurazione
-La configurazione viene salvata in `~/.radarr-sonarr-m3u-sync/config.json`
+### Configuration File
+Configuration is saved in `~/.radarr-sonarr-m3u-sync/config.json`
 
-## 🎯 Funzionalità
+## 🎯 Features
 
-### 🔍 Ricerca
-- Ricerca unificata attraverso Radarr e Sonarr
-- Risultati con immagini e metadati
-- Link diretti alle pagine delle serie
+### 🔍 Search
+- Unified search across Radarr and Sonarr
+- Results with images and metadata
+- Direct links to series pages
 
-### 📺 Gestione Serie
-- Visualizzazione dettagliata delle serie
-- Navigazione per stagioni ed episodi
-- Statistiche di download e stato
+### 📺 Series Management
+- Detailed series view
+- Navigation through seasons and episodes
+- Download statistics and status
 
-### ⬇️ Download M3U8
-- Input manuale di URL M3U8
-- Progresso di download in tempo reale
-- Generazione automatica dei percorsi di destinazione
-- Support per episodi multipli
+### ⬇️ M3U8 Download
+- Manual M3U8 URL input
+- Real-time download progress
+- Automatic destination path generation
+- Support for multiple episodes
 
-### 🎨 Interface Utente
-- Design responsive e moderno
-- Tema personalizzato con Tailwind CSS
-- Icone FontAwesome
-- Feedback visivo per tutte le operazioni
+### 🎨 User Interface
+- Responsive and modern design
+- Custom theme with Tailwind CSS
+- FontAwesome icons
+- Visual feedback for all operations
 
 ## 🛠️ API Endpoints
 
-### Ricerca
-- `GET /api/search?term={query}` - Ricerca globale
+### Search
+- `GET /api/search?term={query}` - Global search
 
-### Serie
-- `GET /api/series/{id}` - Dettagli serie
-- `GET /api/series/{id}/episodes?season_number={num}` - Episodi stagione
+### Series
+- `GET /api/series/{id}` - Series details
+- `GET /api/series/{id}/episodes?season_number={num}` - Season episodes
 
 ### Download
-- `POST /api/download/?url={m3u8_url}&path={file_path}` - Download M3U8
+- `POST /api/download/?url={m3u8_url}&path={file_path}` - M3U8 download
 
-### Configurazione
-- `GET /api/configuration` - Ottieni configurazione
-- `POST /api/configuration` - Aggiorna configurazione
+### Configuration
+- `GET /api/configuration` - Get configuration
+- `POST /api/configuration` - Update configuration
 
-## 🔧 Tecnologie Utilizzate
+## 🔧 Technologies Used
 
 ### Backend
-- **FastAPI** - Framework web moderno
-- **Pydantic** - Validazione dati
+- **FastAPI** - Modern web framework
+- **Pydantic** - Data validation
 - **Injector** - Dependency injection
-- **yt-dlp** - Download video
-- **Requests** - Client HTTP
+- **yt-dlp** - Video download
+- **Requests** - HTTP client
 
 ### Frontend
-- **React 19** - Framework UI
+- **React 19** - UI framework
 - **TypeScript** - Type safety
 - **Tailwind CSS** - Styling
 - **React Router** - Routing
 - **Vite** - Build tool
 
-## 📝 Contributi
+## 📝 Contributing
 
-I contributi sono benvenuti! Per contribuire:
+Contributions are welcome! To contribute:
 
-1. Fork il progetto
-2. Crea un branch per la tua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit le modifiche (`git commit -m 'Add some AmazingFeature'`)
-4. Push al branch (`git push origin feature/AmazingFeature`)
-5. Apri una Pull Request
+1. Fork the project
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📄 Licenza
+## 📄 License
 
-Questo progetto è distribuito sotto licenza MIT. Vedi il file `LICENSE` per i dettagli.
+This project is distributed under the MIT License. See the `LICENSE` file for details.
 
-## 🐛 Bug Report e Feature Request
+## 🐛 Bug Reports and Feature Requests
 
-Usa le [GitHub Issues](https://github.com/your-username/radarr-sonarr-m3u-sync/issues) per:
-- Segnalare bug
-- Richiedere nuove funzionalità
-- Porre domande
+Use [GitHub Issues](https://github.com/your-username/radarr-sonarr-m3u-sync/issues) to:
+- Report bugs
+- Request new features
+- Ask questions
 
-## 🙏 Riconoscimenti
+## 🙏 Acknowledgments
 
-- [Radarr](https://radarr.video/) - Gestione film
-- [Sonarr](https://sonarr.tv/) - Gestione serie TV
-- [yt-dlp](https://github.com/yt-dlp/yt-dlp) - Download video
-- [React](https://reactjs.org/) - Framework UI
-- [FastAPI](https://fastapi.tiangolo.com/) - Framework backend
+- [Radarr](https://radarr.video/) - Movie management
+- [Sonarr](https://sonarr.tv/) - TV series management
+- [yt-dlp](https://github.com/yt-dlp/yt-dlp) - Video download
+- [React](https://reactjs.org/) - UI framework
+- [FastAPI](https://fastapi.tiangolo.com/) - Backend framework

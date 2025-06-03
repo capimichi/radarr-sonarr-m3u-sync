@@ -165,6 +165,10 @@ Configuration is saved in `~/.radarr-sonarr-m3u-sync/config.json`
 
 - [ ] Add configuration to change backend port
 - [ ] Add the Radarr integration
+- [ ] Add the functionality to download subtitles manually
+- [ ] Add the functionality to resize the video to a specific resolution
+- [ ] Add the functionality to convert the video to a specific format
+- [ ] Add the functionality to add a language to the video
 
 ## 📝 Contributing
 

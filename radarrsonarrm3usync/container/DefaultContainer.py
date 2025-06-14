@@ -5,6 +5,8 @@ import os
 from injector import Injector
 from dotenv import load_dotenv
 
+from radarrsonarrm3usync.service.DownloadService import DownloadService
+
 
 class DefaultContainer:
     injector = None
@@ -43,10 +45,13 @@ class DefaultContainer:
     def _init_environment_variables(self):
         self.api_host = os.environ.get('API_HOST', '0.0.0.0')
         self.api_port = int(os.environ.get('API_PORT', 8958))
+        self.uvicorn_reload = os.environ.get('UVICORN_RELOAD', 'false').lower() == 'true'
+        self.proxy = os.environ.get('PROXY', None)
 
     def _init_logging(self):
         logging.basicConfig(filename=self.app_log_path, level=logging.INFO, filemode='a', format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s', datefmt='%H:%M:%S')
 
     def _init_bindings(self):
-        # self.injector.binder.bind(PostDirVariable, PostDirVariable(self.post_dir))
-        pass
+        self.injector.binder.bind(DownloadService, DownloadService(
+            proxy=self.proxy
+        ))

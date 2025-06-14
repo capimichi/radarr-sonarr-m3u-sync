@@ -61,5 +61,5 @@ if __name__ == "__main__":
         "radarrsonarrm3usync.api:app",  # Percorso completo del modulo
         host=default_container.get_var("api_host"),
         port=default_container.get_var("api_port"),
-        reload=True
+        reload=default_container.get_var("uvicorn_reload"),
     )

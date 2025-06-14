@@ -11,7 +11,8 @@ from radarrsonarrm3usync.helper.M3uHelper import M3uHelper
 
 class DownloadService:
 
-    def __init__(self):
+    def __init__(self, proxy: str = None):
+        self.proxy = proxy
         self.executor = ThreadPoolExecutor(max_workers=1)
 
     async def download(self, url: str, path: str) -> AsyncGenerator[Dict[str, Any], None]:
@@ -40,8 +41,13 @@ class DownloadService:
             '--no-check-certificate',
             '-o',
             template_path,
-            url,
         ]
+        
+        # Add proxy if configured
+        if self.proxy:
+            command.extend(['--proxy', self.proxy])
+            
+        command.append(url)
         
         # Start the process in the background
         process = subprocess.Popen(
@@ -96,4 +102,4 @@ class DownloadService:
         except:
             pass
 
-        
+

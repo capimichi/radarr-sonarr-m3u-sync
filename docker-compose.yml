@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  radarr-sonarr-m3u-sync:
+    build: .
+    ports:
+      - "8958:8958"
+    volumes:
+      - ./:/app
+    restart: unless-stopped

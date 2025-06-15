@@ -7,4 +7,6 @@ services:
       - "8958:8958"
     volumes:
       - ./:/app
+    environment:
+      - DIST_DIR=/root/dist
     restart: unless-stopped

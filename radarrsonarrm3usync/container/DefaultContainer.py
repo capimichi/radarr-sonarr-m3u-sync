@@ -47,6 +47,7 @@ class DefaultContainer:
         self.api_port = int(os.environ.get('API_PORT', 8958))
         self.uvicorn_reload = os.environ.get('UVICORN_RELOAD', 'false').lower() == 'true'
         self.proxy = os.environ.get('PROXY', None)
+        self.dist_dir = os.environ.get('DIST_DIR', '/root/dist')
 
     def _init_logging(self):
         logging.basicConfig(filename=self.app_log_path, level=logging.INFO, filemode='a', format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s', datefmt='%H:%M:%S')

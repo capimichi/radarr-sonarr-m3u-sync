@@ -49,7 +49,7 @@ app.include_router(series_controller.router, prefix="/api")
 # Includiamo il router del DownloadController nell'app
 app.include_router(download_controller.router, prefix="/api")
 
-app.mount("/", StaticFiles(directory="dist", html=True), name="dist")
+app.mount("/", StaticFiles(directory=default_container.get_var("dist_dir"), html=True), name="dist")
 
 @app.get("/health", tags=["Health"])
 async def health_check():

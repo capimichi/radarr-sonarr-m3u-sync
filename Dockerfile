@@ -31,8 +31,8 @@ RUN npm install
 # Run npm build
 RUN npm run build
 
-# Create dist directory if it doesn't exist
-RUN mkdir -p dist
+# Create dist directory in the new default location and copy built files
+RUN mkdir -p /root/dist && cp -r dist/* /root/dist/
 
 # Expose port
 EXPOSE 8958

@@ -25,6 +25,15 @@ const EpisodeItem: React.FC<EpisodeItemProps> = ({
   onDownloadPathChange,
   onDownload,
 }) => {
+  const getResolutionInfo = () => {
+    if (episode.hasFile && episode.episodeFile?.quality?.quality) {
+      console.log('Episode has file and quality:', episode.episodeFile.quality);
+      const quality = episode.episodeFile.quality.quality;
+      return quality.resolution ? `${quality.resolution}p` : quality.name;
+    }
+    return null;
+  };
+
   return (
     <div className="bg-gray-50 rounded p-3 text-sm">
       <div className="flex items-center justify-between">
@@ -33,13 +42,20 @@ const EpisodeItem: React.FC<EpisodeItemProps> = ({
             {seasonNumber.toString().padStart(2, '0')}x{episode.episodeNumber.toString().padStart(2, '0')}
           </span>
           <span className="text-gray-900">{episode.title}</span>
-          <span className={`px-2 py-1 rounded-full text-xs ${
-            episode.hasFile 
-              ? 'bg-green-100 text-green-800' 
-              : 'bg-red-100 text-red-800'
-          }`}>
-            {episode.hasFile ? 'Downloaded' : 'Missing'}
-          </span>
+          <div className="flex items-center space-x-2">
+            <span className={`px-2 py-1 rounded-full text-xs ${
+              episode.hasFile 
+                ? 'bg-green-100 text-green-800' 
+                : 'bg-red-100 text-red-800'
+            }`}>
+              {episode.hasFile ? 'Downloaded' : 'Missing'}
+            </span>
+            {getResolutionInfo() && (
+              <span className="px-2 py-1 rounded-full text-xs bg-blue-100 text-blue-800">
+                {getResolutionInfo()}
+              </span>
+            )}
+          </div>
         </div>
         <div className="text-gray-500">
           {episode.airDate && new Date(episode.airDate).toLocaleDateString()}

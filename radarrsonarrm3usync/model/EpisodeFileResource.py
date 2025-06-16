@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional, List, Dict, Union
 from datetime import datetime
 
 
@@ -9,7 +9,7 @@ class Language(BaseModel):
 
 
 class QualityModel(BaseModel):
-    pass
+    quality: Optional[Dict[str, Union[str, int, float]]] = None 
 
 
 class CustomFormatResource(BaseModel):
